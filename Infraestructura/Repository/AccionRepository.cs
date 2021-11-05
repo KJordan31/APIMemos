@@ -39,7 +39,7 @@ namespace Infraestructura.Repository
 
         public async Task<int> Borrar(int id)
         {
-            var queryBorrar = "DELETE From TB_Accion Where ID = @Id";
+            var queryBorrar = "DELETE From TB_Accion Where Id_Accion = @Id";
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
@@ -61,7 +61,7 @@ namespace Infraestructura.Repository
 
         public async Task<Accion> ObtenerPorId(int id)
         {
-            var query = "SELECT * FROM TB_Accion WHERE Id = @Id";
+            var query = "SELECT * FROM TB_Accion WHERE Id_Accion = @Id";
             using (IDbConnection dbConnection = Connection)
             {
                  dbConnection.Open();
