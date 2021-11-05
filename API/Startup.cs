@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Filters;
+using Aplicacion.Validadores;
+using FluentValidation.AspNetCore;
 using Infraestructura;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,7 +32,11 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfraestructure();
-            services.AddControllers();
+            services.AddControllers( options => {
+                options.Filters.Add<ValidationFilter>();
+            })
+            .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<AccionDTOValidator>());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
