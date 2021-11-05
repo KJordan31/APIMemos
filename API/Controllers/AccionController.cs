@@ -37,6 +37,35 @@ namespace API.Controllers
             return Ok(data);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GuardarAccion(AccionDTO request)
+        {
+            Accion accion = new()
+            {
+                Descripcion = request.Descripcion,
+                SistemaUsuario = request.Usuario
+            };
+            var resultado = await unitOfWork.Acciones.Agregar(accion);
+
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> ActualizarAccion(int id, AccionDTO request)
+        {
+            var existeAccion = await unitOfWork.Acciones.ObtenerPorId(id);
+
+            if (existeAccion is null)  return NotFound($"No se puede Actualizar el recurso con id {id} porque no existe");
+
+            Accion actulizarAccion =  existeAccion;
+
+            actulizarAccion.Descripcion = request.Descripcion;
+
+            await unitOfWork.Acciones.Actualizar(actulizarAccion);
+
+            return Ok();
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
@@ -44,7 +73,7 @@ namespace API.Controllers
             var existeAccion = await unitOfWork.Acciones.ObtenerPorId(id);
             if (existeAccion is null)
             {
-                return NotFound();
+                return NotFound($"No se puede borrar el recurso con id {id} porque no existe");
             }
 
             var resultado = await unitOfWork.Acciones.Borrar(id);

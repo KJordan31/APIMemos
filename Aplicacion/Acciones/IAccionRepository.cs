@@ -5,6 +5,6 @@ namespace Aplicacion.Acciones
 {
     public interface IAccionRepository : IGenericRepository<Accion>
     {
-
+        
     }
 }

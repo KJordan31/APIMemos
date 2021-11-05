@@ -27,14 +27,41 @@ namespace Infraestructura.Repository
             }
         }
 
-        public Task<int> Actualizar(Accion entity)
+        //TODO ObtenerUltimoID.
+        private int ObtnerUltimoID()
         {
-            throw new System.NotImplementedException();
+            var sql = "select top 1 ID + 1 as UltimoID from TB_Accion order by SistemaFecha desc";
+            using (IDbConnection dbConnection = Connection)
+            {
+                 dbConnection.Open();
+                 var result = dbConnection.ExecuteScalar<int>(sql);
+                 return result;
+            }
         }
 
-        public Task<int> Agregar(Accion entity)
+        public async Task<int> Actualizar(Accion entity)
         {
-            throw new System.NotImplementedException();
+            var sqlActualizar = "UPDATE TB_Accion set Descripcion = @descripcion where ID = @id";
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                var result = await dbConnection.ExecuteScalarAsync<int>(sqlActualizar, new {descripcion = entity.Descripcion , id = entity.ID});
+                return result;
+            }
+        }
+
+        public async Task<int> Agregar(Accion entity)
+        {
+
+            entity.ID = ObtnerUltimoID();
+
+            var sql = "Insert into TB_Accion(ID,Descripcion, SistemaUsuario) Values(@ID,@Descripcion, @SistemaUsuario)";
+            using (IDbConnection dbConnection = Connection)
+            {
+                 dbConnection.Open();
+                 var result = await dbConnection.ExecuteAsync(sql, entity);
+                 return result;
+            }
         }
 
         public async Task<int> Borrar(int id)
