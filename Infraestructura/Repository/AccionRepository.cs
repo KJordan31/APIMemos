@@ -28,9 +28,9 @@ namespace Infraestructura.Repository
         }
 
         //TODO ObtenerUltimoID.
-        private int ObtnerUltimoID()
+        private int ObtenerUltimoID()
         {
-            var sql = "select top 1 ID + 1 as UltimoID from TB_Accion order by SistemaFecha desc";
+            var sql = "select top 1 Id_Accion + 1 as UltimoID from TB_Accion order by SistemaFecha desc";
             using (IDbConnection dbConnection = Connection)
             {
                  dbConnection.Open();
@@ -41,11 +41,11 @@ namespace Infraestructura.Repository
 
         public async Task<int> Actualizar(Accion entity)
         {
-            var sqlActualizar = "UPDATE TB_Accion set Descripcion = @descripcion where ID = @id";
+            var sqlActualizar = "UPDATE TB_Accion set Descripcion = @descripcion, EnUso = @EnUso where Id_Accion = @Id_Accion";
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                var result = await dbConnection.ExecuteScalarAsync<int>(sqlActualizar, new {descripcion = entity.Descripcion , id = entity.ID});
+                var result = await dbConnection.ExecuteScalarAsync<int>(sqlActualizar, new {descripcion = entity.Descripcion ,EnUso = entity.EnUso, Id_Accion = entity.Id_Accion});
                 return result;
             }
         }
@@ -53,9 +53,9 @@ namespace Infraestructura.Repository
         public async Task<int> Agregar(Accion entity)
         {
 
-            entity.ID = ObtnerUltimoID();
+            entity.Id_Accion = ObtenerUltimoID();
 
-            var sql = "Insert into TB_Accion(ID,Descripcion, SistemaUsuario) Values(@ID,@Descripcion, @SistemaUsuario)";
+            var sql = "Insert into TB_Accion(Id_Accion,Descripcion, SistemaUsuario) Values(@Id_Accion,@Descripcion, @SistemaUsuario)";
             using (IDbConnection dbConnection = Connection)
             {
                  dbConnection.Open();
@@ -66,11 +66,11 @@ namespace Infraestructura.Repository
 
         public async Task<int> Borrar(int id)
         {
-            var queryBorrar = "DELETE From TB_Accion Where Id_Accion = @Id";
+            var queryBorrar = "DELETE From TB_Accion Where Id_Accion = @Id_Accion";
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                var result = await dbConnection.ExecuteAsync(queryBorrar, new {Id = id});
+                var result = await dbConnection.ExecuteAsync(queryBorrar, new {Id_Accion = id});
                 return result;
             }
         }
@@ -88,11 +88,11 @@ namespace Infraestructura.Repository
 
         public async Task<Accion> ObtenerPorId(int id)
         {
-            var query = "SELECT * FROM TB_Accion WHERE Id_Accion = @Id";
+            var query = "SELECT * FROM TB_Accion WHERE Id_Accion = @Id_Accion";
             using (IDbConnection dbConnection = Connection)
             {
                  dbConnection.Open();
-                 var result = await dbConnection.QuerySingleOrDefaultAsync<Accion>(query, new {Id = id});
+                 var result = await dbConnection.QuerySingleOrDefaultAsync<Accion>(query, new {Id_Accion = id});
                  return result;
             }
         }

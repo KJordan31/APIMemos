@@ -1,12 +1,15 @@
-namespace Aplicacion.Acciones
+namespace  Aplicacion.Estados
 {
-    public class AccionDTO
+
+    public class EstadoDTO
     {
-        public int ID { get; set; }
+        public int Id_Estado {get; set;}
+
         public string Descripcion { get; set; }
 
         public bool EnUso { get; set; }
-
+        
         public string Usuario { get; set; }
     }
+    
 }

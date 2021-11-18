@@ -1,5 +1,7 @@
 using Aplicacion.Acciones;
+using Aplicacion.Destinatarios;
 using Aplicacion.Estados;
+using Aplicacion.Tipos;
 
 namespace Aplicacion
 {
@@ -7,5 +9,9 @@ namespace Aplicacion
     {
          IAccionRepository Acciones { get; }
          IEstadoRepository Estados { get; }
+
+         ITipoMemorandumRepository Tipos {get; }
+
+         ITipoDestinatarioRepository Destinatarios {get; }
     }
 }

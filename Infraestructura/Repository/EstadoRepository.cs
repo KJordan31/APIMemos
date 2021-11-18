@@ -27,21 +27,33 @@ namespace Infraestructura.Repository
             }
         }
 
+        private int ObtenerUltimoID()
+        {
+            var query = "SELECT top 1 Id_Estado + 1 as UltimoID from TB_Estado order by SistemaFecha desc";
+            using (IDbConnection dbConnection = Connection )
+            {
+                 dbConnection.Open();
+                 var resultado = dbConnection.ExecuteScalar<int>(query);
+                 return resultado;
+            }
+        }
+
         public async Task<int> Actualizar(Estado entity)
         {   
-           var queryActualizar = "UPDATE TB_Estado SET Descripcion=@Descripcion WHERE Id_Estado=@Id_Estado)";
+           var queryActualizar = "UPDATE TB_Estado SET Descripcion=@Descripcion,EnUso = @EnUso, WHERE Id_Estado=@Id_Estado";
            using (IDbConnection dbConnection = Connection)
            {
                 dbConnection.Open();
-                var resultado = await dbConnection.ExecuteAsync(queryActualizar, entity);
+                var resultado = await dbConnection.ExecuteScalarAsync<int>(queryActualizar, new {descripcion = entity.Descripcion,EnUso= entity.EnUso, Id_Estado = entity.Id_Estado});
                 return resultado;
            }
         }
 
         public async Task<int> Agregar(Estado entity)
         {
-            
-           var queryAdd = "INSERT INTO TB_Estado (Id_Estado, Descripcion) Values (@Id_Estado,@Descripcion)";
+            entity.Id_Estado = ObtenerUltimoID();
+
+           var queryAdd = "INSERT INTO TB_Estado (Id_Estado, Descripcion,SistemaUsuario) Values (@Id_Estado,@Descripcion,@SistemaUsuario)";
            using (IDbConnection dbConnection = Connection)
            {
                dbConnection.Open();
@@ -53,11 +65,11 @@ namespace Infraestructura.Repository
 
         public async Task<int> Borrar(int id)
         {
-            var queryDelete = "DELETE FROM TB_Estado WHERE Id_Estado=@ID";
+            var queryDelete = "DELETE FROM TB_Estado WHERE Id_Estado=@Id_Estado";
             using (IDbConnection dbConnection =Connection)
             {
                 dbConnection.Open();
-                var resultado = await dbConnection.ExecuteAsync(queryDelete, new {ID=id});
+                var resultado = await dbConnection.ExecuteAsync(queryDelete, new {Id_Estado=id});
                  return resultado;
             }
         }
@@ -75,11 +87,11 @@ namespace Infraestructura.Repository
 
         public async Task<Estado> ObtenerPorId(int id)
         {
-            var query = "SELECT * From TB_Estado WHERE Id_Estado=@ID";
+            var query = "SELECT * From TB_Estado WHERE Id_Estado=@Id_Estado";
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                var resultado = await dbConnection.QueryAsync<Estado>(query, new {ID = id});
+                var resultado = await dbConnection.QueryAsync<Estado>(query, new {Id_Estado = id});
                  return resultado.FirstOrDefault();
             }
             }

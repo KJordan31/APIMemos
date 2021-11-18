@@ -1,12 +1,14 @@
-namespace Aplicacion.Acciones
+namespace Aplicacion.Destinatarios
 {
-    public class AccionDTO
+
+    public class TipoDestinatarioDTO
     {
-        public int ID { get; set; }
+        public int Id_Tipo_Destinatario { get; set; }
+
         public string Descripcion { get; set; }
 
         public bool EnUso { get; set; }
-
+        
         public string Usuario { get; set; }
     }
 }
