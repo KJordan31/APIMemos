@@ -2,7 +2,7 @@ namespace Aplicacion.Tipos
 {
     public class  TipoMemorandumDTO
     {
-        public int Id_Tipo { get; set; }
+        public int Id { get; set; }
 
         public string Tipo { get; set; }
 

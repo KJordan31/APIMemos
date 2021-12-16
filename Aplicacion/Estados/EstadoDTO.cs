@@ -3,7 +3,7 @@ namespace  Aplicacion.Estados
 
     public class EstadoDTO
     {
-        public int Id_Estado {get; set;}
+        public int Id {get; set;}
 
         public string Descripcion { get; set; }
 

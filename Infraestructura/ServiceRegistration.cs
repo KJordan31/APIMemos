@@ -3,6 +3,7 @@ using Aplicacion.Acciones;
 using Aplicacion.Destinatarios;
 using Aplicacion.Estados;
 using Aplicacion.Tipos;
+using Aplicacion.Memorandums;
 using Infraestructura.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +17,7 @@ namespace Infraestructura
             services.AddTransient<IEstadoRepository, EstadoRepository>();
             services.AddTransient<ITipoMemorandumRepository, TipoMemorandumRepository>();
             services.AddTransient<ITipoDestinatarioRepository, TipoDestinatarioRepository>();
+            services.AddTransient<IMemorandumRepository, MemorandumRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }
