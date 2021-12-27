@@ -61,6 +61,7 @@ namespace API.Controllers
                 var existeTipo = await unitOfWork.Tipos.ObtenerPorId(id);
                 if (existeTipo is null) return NotFound($"No se puede Actualizar el recurso con id {id} porque no existe");
 
+              request.Id = id;
               var actualizarTipo = _mapper.Map<TipoMemorandum>(request);
 
                 await unitOfWork.Tipos.Actualizar(actualizarTipo);

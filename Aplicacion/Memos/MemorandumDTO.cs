@@ -1,4 +1,4 @@
-namespace Aplicacion.Memorandums
+namespace Aplicacion.Memos
 {
     public class MemorandumDTO
     {

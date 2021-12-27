@@ -43,35 +43,31 @@ public async Task<IActionResult> GetById(int id)
 }
 
 
-[HttpPut("{id}")]
-public async Task<IActionResult> ActualizarDestinatario(int id, TipoDestinatarioDTO request)
-     
+  [HttpPut("{id}")]
+        public async Task<IActionResult> ActualizarDestinatario(int id, TipoDestinatarioDTO request)
+        {
+            var existeAccion = await unitOfWork.Destinatarios.ObtenerPorId(id);
 
-{
-    var existeDestinatario = await unitOfWork.Destinatarios.ObtenerPorId(id);
+            if (existeAccion is null)  return NotFound($"No se puede Actualizar el recurso con id {id} porque no existe");
 
-    if (existeDestinatario is null) return NotFound($"No se puede Actualizar el recurso con ID: {id} porque no existe");
-    
+            request.Id = id;
+            var actualizarAccion= _mapper.Map<TipoDestinatario>(request);
+            
+            await unitOfWork.Destinatarios.Actualizar(actualizarAccion);
 
-    var actualizarDestinatario = _mapper.Map<TipoDestinatario>(Request);
-   
-
-    await unitOfWork.Destinatarios.Actualizar(actualizarDestinatario);
-
-    return Ok();
-}
+            return Ok();
+        }
 
 [HttpPost]
 
-public async Task<IActionResult> GuardarDestinatario(TipoDestinatarioDTO request)
-{
-   var destinatario = _mapper.Map<TipoDestinatario>(Request);
-   
+   public async Task<IActionResult> GuardarDestinatario(TipoDestinatarioDTO request)
+        {
+            var accion  = _mapper.Map<TipoDestinatario>(request);
 
-    var resultado = await unitOfWork.Destinatarios.Agregar(destinatario);
+            var resultado = await unitOfWork.Destinatarios.Agregar(accion);
 
-    return Ok();
-}
+            return Ok();
+        }
 
 
 [HttpDelete("{id}")]

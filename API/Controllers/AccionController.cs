@@ -57,6 +57,7 @@ namespace API.Controllers
 
             if (existeAccion is null)  return NotFound($"No se puede Actualizar el recurso con id {id} porque no existe");
 
+            request.ID = id;
             var actualizarAccion= _mapper.Map<Accion>(request);
             
             await unitOfWork.Acciones.Actualizar(actualizarAccion);

@@ -1,7 +1,7 @@
 using Aplicacion.Acciones;
 using Aplicacion.Destinatarios;
 using Aplicacion.Estados;
-using Aplicacion.Memorandums;
+using Aplicacion.Memos;
 using Aplicacion.Tipos;
 
 namespace Aplicacion
@@ -14,7 +14,6 @@ namespace Aplicacion
          ITipoMemorandumRepository Tipos {get; }
 
          ITipoDestinatarioRepository Destinatarios {get; }
-         
-        IMemorandumRepository Memorandums {get; }
+        IMemorandumRepository Memos {get; }
     }
 }

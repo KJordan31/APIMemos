@@ -72,6 +72,7 @@ namespace API.Controllers
 
             if (existeEstado is null)  return NotFound($"No se puede Actualizar el recurso con id {id} porque no existe");
 
+          request.Id = id;
           var actualizarEstado = _mapper.Map<Estado>(request);
 
             await unitOfWork.Estados.Actualizar(actualizarEstado);

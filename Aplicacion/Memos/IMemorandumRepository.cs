@@ -1,7 +1,7 @@
 using Aplicacion.Interfaces;
 using Dominio;
 
-namespace Aplicacion.Memorandums
+namespace Aplicacion.Memos
 {
     public interface IMemorandumRepository : IGenericRepository<Memorandum>
     {

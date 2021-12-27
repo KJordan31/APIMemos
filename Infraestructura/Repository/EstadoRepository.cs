@@ -38,15 +38,15 @@ namespace Infraestructura.Repository
             }
         }
 
-        public async Task<int> Actualizar(Estado entity)
-        {   
-           var queryActualizar = "UPDATE TB_Estado SET Descripcion=@Descripcion,EnUso = @EnUso, WHERE Id_Estado=@Id_Estado";
-           using (IDbConnection dbConnection = Connection)
-           {
-                dbConnection.Open();
-                var resultado = await dbConnection.ExecuteScalarAsync<int>(queryActualizar, new {descripcion = entity.Descripcion,EnUso= entity.EnUso, Id_Estado = entity.Id_Estado});
-                return resultado;
-           }
+         public async Task<int> Actualizar(Estado entity)
+        {
+            var sqlActualizar ="UPDATE TB_Estado set  Descripcion = @Descripcion where Id_Estado = @Id_Estado";
+            using (IDbConnection dbConnection = Connection)
+            {
+                 dbConnection.Open();
+                 var result = await dbConnection.ExecuteScalarAsync<int>(sqlActualizar, new {Descripcion = entity.Descripcion, Id_Estado = entity.Id_Estado});
+                 return result;
+            }
         }
 
         public async Task<int> Agregar(Estado entity)

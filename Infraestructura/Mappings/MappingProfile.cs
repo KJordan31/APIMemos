@@ -1,10 +1,10 @@
-using Aplicacion.Acciones;
 using Dominio;
 using AutoMapper;
+using Aplicacion.Acciones;
 using Aplicacion.Estados;
 using Aplicacion.Destinatarios;
 using Aplicacion.Tipos;
-using Aplicacion.Memorandums;
+using Aplicacion.Memos;
 
 namespace Infraestructura.Mappings
 {

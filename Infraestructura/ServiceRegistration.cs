@@ -3,7 +3,7 @@ using Aplicacion.Acciones;
 using Aplicacion.Destinatarios;
 using Aplicacion.Estados;
 using Aplicacion.Tipos;
-using Aplicacion.Memorandums;
+using Aplicacion.Memos;
 using Infraestructura.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
