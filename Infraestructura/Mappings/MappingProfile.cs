@@ -5,6 +5,7 @@ using Aplicacion.Estados;
 using Aplicacion.Destinatarios;
 using Aplicacion.Tipos;
 using Aplicacion.Memos;
+using Aplicacion.Contenidos;
 
 namespace Infraestructura.Mappings
 {
@@ -39,6 +40,13 @@ namespace Infraestructura.Mappings
         .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario));
          CreateMap<MemorandumDTO, Memorandum>()
         .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario));
+         CreateMap<ContenidoMemo, ContenidoDTO>()
+        .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario))
+        .ForMember(x=> x.ID, y=> y.MapFrom(z => z.Id_Contenido));       
+        CreateMap<ContenidoDTO, ContenidoMemo>()
+        .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario))
+        .ForMember(x=> x.Id_Contenido, y => y.MapFrom(z => z.ID));
+       
 
         }
        

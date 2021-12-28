@@ -1,4 +1,5 @@
 using Aplicacion.Acciones;
+using Aplicacion.Contenidos;
 using Aplicacion.Destinatarios;
 using Aplicacion.Estados;
 using Aplicacion.Memos;
@@ -9,11 +10,15 @@ namespace Aplicacion
     public interface IUnitOfWork
     {
          IAccionRepository Acciones { get; }
+         
          IEstadoRepository Estados { get; }
 
          ITipoMemorandumRepository Tipos {get; }
 
          ITipoDestinatarioRepository Destinatarios {get; }
+
         IMemorandumRepository Memos {get; }
+
+        IContenidoRepository Contenidos {get; }
     }
 }

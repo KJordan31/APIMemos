@@ -6,6 +6,7 @@ using Aplicacion.Tipos;
 using Aplicacion.Memos;
 using Infraestructura.Repository;
 using Microsoft.Extensions.DependencyInjection;
+using Aplicacion.Contenidos;
 
 namespace Infraestructura
 {
@@ -18,6 +19,7 @@ namespace Infraestructura
             services.AddTransient<ITipoMemorandumRepository, TipoMemorandumRepository>();
             services.AddTransient<ITipoDestinatarioRepository, TipoDestinatarioRepository>();
             services.AddTransient<IMemorandumRepository, MemorandumRepository>();
+            services.AddTransient<IContenidoRepository, ContenidoRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }
