@@ -1,3 +1,4 @@
+using Apliacion.Adjuntos;
 using Aplicacion.Acciones;
 using Aplicacion.Contenidos;
 using Aplicacion.Destinatarios;
@@ -20,5 +21,7 @@ namespace Aplicacion
         IMemorandumRepository Memos {get; }
 
         IContenidoRepository Contenidos {get; }
+
+        IAdjuntoRepository Adjuntos {get; }
     }
 }
