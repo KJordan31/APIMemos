@@ -1,5 +1,6 @@
 using Apliacion.Adjuntos;
 using Aplicacion.Acciones;
+using Aplicacion.Bitacoras;
 using Aplicacion.Contenidos;
 using Aplicacion.Destinatarios;
 using Aplicacion.Estados;
@@ -23,5 +24,7 @@ namespace Aplicacion
         IContenidoRepository Contenidos {get; }
 
         IAdjuntoRepository Adjuntos {get; }
+
+        IBitacoraRepository Bitacoras {get; }
     }
 }

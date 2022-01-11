@@ -6,6 +6,7 @@ using Aplicacion.Tipos;
 using Aplicacion.Memos;
 using Aplicacion.Contenidos;
 using Apliacion.Adjuntos;
+using Aplicacion.Bitacoras;
 
 namespace Infraestructura.Repository
 {
@@ -14,7 +15,8 @@ namespace Infraestructura.Repository
         public UnitOfWork(IAccionRepository accionRepository,IEstadoRepository estadoRepository, 
         ITipoMemorandumRepository tipoMemorandumRepository, 
         ITipoDestinatarioRepository tipoDestinatarioRepository, IMemorandumRepository memorandumRepository,
-        IContenidoRepository contenidoRepository, IAdjuntoRepository adjuntoRepository)
+        IContenidoRepository contenidoRepository, IAdjuntoRepository adjuntoRepository,
+        IBitacoraRepository bitacoraRepository)
         {
             Acciones = accionRepository;         
             Estados = estadoRepository;
@@ -23,6 +25,7 @@ namespace Infraestructura.Repository
             Memos= memorandumRepository; 
             Contenidos = contenidoRepository;
             Adjuntos = adjuntoRepository; 
+            Bitacoras = bitacoraRepository;
         }
 
         public IAccionRepository Acciones { get; }
@@ -38,5 +41,7 @@ namespace Infraestructura.Repository
         public IContenidoRepository Contenidos {get; }
 
         public IAdjuntoRepository Adjuntos {get; }
+
+        public IBitacoraRepository Bitacoras {get; }
     }
 }

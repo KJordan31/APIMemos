@@ -8,6 +8,7 @@ using Infraestructura.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Aplicacion.Contenidos;
 using Apliacion.Adjuntos;
+using Aplicacion.Bitacoras;
 
 namespace Infraestructura
 {
@@ -22,6 +23,7 @@ namespace Infraestructura
             services.AddTransient<IMemorandumRepository, MemorandumRepository>();
             services.AddTransient<IContenidoRepository, ContenidoRepository>();
             services.AddTransient<IAdjuntoRepository,AdjuntoRepository>();
+            services.AddTransient<IBitacoraRepository, BitacoraRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }

@@ -7,6 +7,7 @@ using Aplicacion.Tipos;
 using Aplicacion.Memos;
 using Aplicacion.Contenidos;
 using Aplicacion.Adjuntos;
+using Aplicacion.Bitacoras;
 
 namespace Infraestructura.Mappings
 {
@@ -53,7 +54,12 @@ namespace Infraestructura.Mappings
         CreateMap<AdjuntoDTO, Adjunto>()
         .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario))
         .ForMember(x=> x.Id_Adjuntos, y => y.MapFrom(z => z.Id));
-       
+        CreateMap<Bitacora, BitacoraDTO>()
+        .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario))
+        .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Bitacora));       
+        CreateMap<BitacoraDTO, Bitacora>()
+        .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario))
+        .ForMember(x=> x.Id_Bitacora, y => y.MapFrom(z => z.Id));
 
         }
        
