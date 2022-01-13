@@ -3,6 +3,7 @@ using Aplicacion.Acciones;
 using Aplicacion.Bitacoras;
 using Aplicacion.Contenidos;
 using Aplicacion.Destinatarios;
+using Aplicacion.DestinatariosUsu;
 using Aplicacion.Estados;
 using Aplicacion.Memos;
 using Aplicacion.Tipos;
@@ -26,5 +27,7 @@ namespace Aplicacion
         IAdjuntoRepository Adjuntos {get; }
 
         IBitacoraRepository Bitacoras {get; }
+
+        IDestinatarioRepository DestinatariosUsu {get; }
     }
 }

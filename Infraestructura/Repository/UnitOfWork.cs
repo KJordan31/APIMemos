@@ -7,6 +7,7 @@ using Aplicacion.Memos;
 using Aplicacion.Contenidos;
 using Apliacion.Adjuntos;
 using Aplicacion.Bitacoras;
+using Aplicacion.DestinatariosUsu;
 
 namespace Infraestructura.Repository
 {
@@ -16,7 +17,7 @@ namespace Infraestructura.Repository
         ITipoMemorandumRepository tipoMemorandumRepository, 
         ITipoDestinatarioRepository tipoDestinatarioRepository, IMemorandumRepository memorandumRepository,
         IContenidoRepository contenidoRepository, IAdjuntoRepository adjuntoRepository,
-        IBitacoraRepository bitacoraRepository)
+        IBitacoraRepository bitacoraRepository, IDestinatarioRepository destinatarioRepository)
         {
             Acciones = accionRepository;         
             Estados = estadoRepository;
@@ -26,6 +27,7 @@ namespace Infraestructura.Repository
             Contenidos = contenidoRepository;
             Adjuntos = adjuntoRepository; 
             Bitacoras = bitacoraRepository;
+            DestinatariosUsu = destinatarioRepository;
         }
 
         public IAccionRepository Acciones { get; }
@@ -43,5 +45,7 @@ namespace Infraestructura.Repository
         public IAdjuntoRepository Adjuntos {get; }
 
         public IBitacoraRepository Bitacoras {get; }
+
+        public IDestinatarioRepository DestinatariosUsu {get; }
     }
 }
