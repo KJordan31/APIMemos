@@ -1,10 +1,11 @@
-using Apliacion.Adjuntos;
+using Aplicacion.Adjuntos;
 using Aplicacion.Acciones;
 using Aplicacion.Bitacoras;
 using Aplicacion.Contenidos;
 using Aplicacion.Destinatarios;
 using Aplicacion.DestinatariosUsu;
 using Aplicacion.Estados;
+using Aplicacion.Firmas;
 using Aplicacion.Memos;
 using Aplicacion.Tipos;
 
@@ -29,5 +30,7 @@ namespace Aplicacion
         IBitacoraRepository Bitacoras {get; }
 
         IDestinatarioRepository DestinatariosUsu {get; }
+
+        IFirmaRepository Firmas {get; }
     }
 }

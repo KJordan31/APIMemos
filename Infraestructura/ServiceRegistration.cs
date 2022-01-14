@@ -7,9 +7,10 @@ using Aplicacion.Memos;
 using Infraestructura.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Aplicacion.Contenidos;
-using Apliacion.Adjuntos;
 using Aplicacion.Bitacoras;
 using Aplicacion.DestinatariosUsu;
+using Aplicacion.Firmas;
+using Aplicacion.Adjuntos;
 
 namespace Infraestructura
 {
@@ -26,6 +27,7 @@ namespace Infraestructura
             services.AddTransient<IAdjuntoRepository,AdjuntoRepository>();
             services.AddTransient<IBitacoraRepository, BitacoraRepository>();
             services.AddTransient<IDestinatarioRepository, DestinatarioRepository>();
+            services.AddTransient<IFirmaRepository, FirmaRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }

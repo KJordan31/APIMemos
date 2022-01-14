@@ -9,6 +9,7 @@ using Aplicacion.Contenidos;
 using Aplicacion.Adjuntos;
 using Aplicacion.Bitacoras;
 using Aplicacion.DestinatariosUsu.cs;
+using Aplicacion.Firmas;
 
 namespace Infraestructura.Mappings
 {
@@ -65,6 +66,14 @@ namespace Infraestructura.Mappings
         .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Destinatario));       
         CreateMap<DestinatarioDTO, Destinatario>()
         .ForMember(x=> x.Id_Destinatario, y => y.MapFrom(z => z.Id));
+        CreateMap<Firma, FirmaDTO>()
+        .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario))
+        .ForMember(x=> x.FirmaUsu, y=> y.MapFrom(z => z.Firmas))
+        .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Firma));       
+        CreateMap<FirmaDTO, Firma>()
+        .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario))
+        .ForMember(x=> x.Firmas, y => y.MapFrom(z => z.FirmaUsu))
+        .ForMember(x=> x.Id_Firma, y => y.MapFrom(z => z.Id));
 
 
         }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Apliacion.Adjuntos;
+using Aplicacion.Adjuntos;
 using Dapper;
 using Dominio;
 using Microsoft.Data.SqlClient;
