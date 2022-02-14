@@ -4,7 +4,7 @@ namespace Aplicacion.Tipos
     {
         public int Id { get; set; }
 
-        public string Tipo { get; set; }
+        public string Descripcion { get; set; }
 
         public bool EnUso { get; set; }
 

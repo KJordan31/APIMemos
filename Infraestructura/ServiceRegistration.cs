@@ -11,6 +11,7 @@ using Aplicacion.Bitacoras;
 using Aplicacion.DestinatariosUsu;
 using Aplicacion.Firmas;
 using Aplicacion.Adjuntos;
+using Aplicacion.Usuarios;
 
 namespace Infraestructura
 {
@@ -28,6 +29,7 @@ namespace Infraestructura
             services.AddTransient<IBitacoraRepository, BitacoraRepository>();
             services.AddTransient<IDestinatarioRepository, DestinatarioRepository>();
             services.AddTransient<IFirmaRepository, FirmaRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }

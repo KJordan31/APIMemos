@@ -9,6 +9,7 @@ using Aplicacion.Bitacoras;
 using Aplicacion.DestinatariosUsu;
 using Aplicacion.Firmas;
 using Aplicacion.Adjuntos;
+using Aplicacion.Usuarios;
 
 namespace Infraestructura.Repository
 {
@@ -19,7 +20,7 @@ namespace Infraestructura.Repository
         ITipoDestinatarioRepository tipoDestinatarioRepository, IMemorandumRepository memorandumRepository,
         IContenidoRepository contenidoRepository, IAdjuntoRepository adjuntoRepository,
         IBitacoraRepository bitacoraRepository, IDestinatarioRepository destinatarioRepository,
-        IFirmaRepository firmaRepository)
+        IFirmaRepository firmaRepository, IUsuarioRepository usuarioRepository)
         
         {
             Acciones = accionRepository;         
@@ -32,6 +33,7 @@ namespace Infraestructura.Repository
             Bitacoras = bitacoraRepository;
             DestinatariosUsu = destinatarioRepository;
             Firmas = firmaRepository;
+            Usuarios = usuarioRepository;
         }
 
         public IAccionRepository Acciones { get; }
@@ -53,5 +55,7 @@ namespace Infraestructura.Repository
         public IDestinatarioRepository DestinatariosUsu {get; }
 
         public IFirmaRepository Firmas {get; }
+
+        public IUsuarioRepository Usuarios { get;}
     }
 }

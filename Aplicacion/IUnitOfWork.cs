@@ -1,5 +1,5 @@
-using Aplicacion.Adjuntos;
 using Aplicacion.Acciones;
+using Aplicacion.Adjuntos;
 using Aplicacion.Bitacoras;
 using Aplicacion.Contenidos;
 using Aplicacion.Destinatarios;
@@ -8,29 +8,32 @@ using Aplicacion.Estados;
 using Aplicacion.Firmas;
 using Aplicacion.Memos;
 using Aplicacion.Tipos;
+using Aplicacion.Usuarios;
 
 namespace Aplicacion
 {
     public interface IUnitOfWork
     {
-         IAccionRepository Acciones { get; }
-         
-         IEstadoRepository Estados { get; }
+        IAccionRepository Acciones { get; }
 
-         ITipoMemorandumRepository Tipos {get; }
+        IEstadoRepository Estados { get; }
 
-         ITipoDestinatarioRepository Destinatarios {get; }
+        ITipoMemorandumRepository Tipos { get; }
 
-        IMemorandumRepository Memos {get; }
+        ITipoDestinatarioRepository Destinatarios { get; }
 
-        IContenidoRepository Contenidos {get; }
+        IMemorandumRepository Memos { get; }
 
-        IAdjuntoRepository Adjuntos {get; }
+        IContenidoRepository Contenidos { get; }
 
-        IBitacoraRepository Bitacoras {get; }
+        IAdjuntoRepository Adjuntos { get; }
 
-        IDestinatarioRepository DestinatariosUsu {get; }
+        IBitacoraRepository Bitacoras { get; }
 
-        IFirmaRepository Firmas {get; }
+        IDestinatarioRepository DestinatariosUsu { get; }
+
+        IFirmaRepository Firmas { get; }
+
+        IUsuarioRepository Usuarios { get; }
     }
 }

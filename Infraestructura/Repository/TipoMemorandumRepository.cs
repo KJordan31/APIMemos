@@ -52,17 +52,18 @@ namespace Infraestructura.Repository
         }
 
 
-        public async Task<int> Agregar(TipoMemorandum entity)
+          public async Task<int> Agregar(TipoMemorandum entity)
         {
+
             entity.Id_Tipo = ObtenerUltimoID();
 
-            var sqlAdd = "INSERT INTO TB_Tipo_Memorandum(Id_Tipo,Tipo,SistemaUsuario) VALUES (@Id_Tipo,@Tipo,@SistemaUsuario)";
-       using (IDbConnection dbConnection = Connection)
-       {
-           dbConnection.Open();
-           var resultado = await dbConnection.ExecuteAsync(sqlAdd, entity);
-             return resultado;
-       }
+            var sql = "Insert into TB_Tipo_Memorandum(Id_Tipo,Tipo, SistemaUsuario) Values(@Id_Tipo,@Tipo, @SistemaUsuario)";
+            using (IDbConnection dbConnection = Connection)
+            {
+                 dbConnection.Open();
+                 var result = await dbConnection.ExecuteAsync(sql, entity);
+                 return result;
+            }
         }
 
         public async Task<int> Borrar(int id)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Dominio
 {
@@ -6,12 +7,16 @@ namespace Dominio
     {
 
         public int Id_Destinatario {get; set; }
-        public int Id {get; set; }
+
+        public List<Memorandum> Memos {get; set; } = new List<Memorandum>();
+
         public string SistemaUsuario {get; set; }
 
         public DateTime SistemaFecha {get; set; }
 
         public string Usuario {get; set; }
+
+        public Memorandum Memorandum { get; set; }
 
         
     }

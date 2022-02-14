@@ -10,68 +10,81 @@ using Microsoft.Extensions.Configuration;
 
 namespace Infraestructura.Repository
 {
-
     public class MemorandumRepository : IMemorandumRepository
     {
-        
-            private readonly IConfiguration configuration;
+        private readonly IConfiguration configuration;
 
-            public MemorandumRepository (IConfiguration configuration)
-            {
-                this.configuration = configuration;
-            }
+        public MemorandumRepository(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
 
-            public IDbConnection Connection
+        public IDbConnection Connection
+        {
+            get
             {
-                get
-                {
-                  return new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
-                }
+                return new SqlConnection(configuration
+                        .GetConnectionString("DefaultConnection"));
             }
-        
+        }
+
         private int ObtenerUltimoID()
         {
-            var sql ="select top 1 Id + 1 as UltimoID from TB_Memorandum order by SistemaFecha desc";
+            var sql =
+                "select top 1 Id + 1 as UltimoID from TB_Memorandum order by SistemaFecha desc";
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
                 var result = dbConnection.ExecuteScalar<int>(sql);
-                return result;          
+                return result;
             }
         }
 
         public async Task<int> Actualizar(Memorandum entity)
         {
-            var sqlActualizar ="UPDATE TB_Memorandum set  Asunto = @Asunto where Id = @Id";
+            var sqlActualizar =
+                "UPDATE TB_Memorandum set  Asunto = @Asunto where Id = @Id";
             using (IDbConnection dbConnection = Connection)
             {
-                 dbConnection.Open();
-                 var result = await dbConnection.ExecuteScalarAsync<int>(sqlActualizar, new {Asunto = entity.Asunto, Id = entity.Id});
-                 return result;
+                dbConnection.Open();
+                var result =
+                    await dbConnection
+                        .ExecuteScalarAsync<int>(sqlActualizar,
+                        new { Asunto = entity.Asunto, Id = entity.Id });
+                return result;
             }
         }
 
         public async Task<int> Agregar(Memorandum entity)
         {
+            // repo.destinatarios.agregar(entity.Destinatarios);
             entity.Id = ObtenerUltimoID();
 
-            var sqlAdd= "Insert into TB_Memorandum(Id,Asunto, SistemaUsuario, Codigo) Values(@Id,@Asunto, @SistemaUsuario, @Codigo)";
+            var sqlAdd =
+                "Insert into TB_Memorandum(Id,Asunto, SistemaUsuario, Codigo,Id_Tipo, Fecha_Modificacion, Id_Tipo_Destinatario, Id_Estado, Id_Area) Values(@Id, @Asunto, @SistemaUsuario, @Codigo, @Id_Tipo, @Fecha_Modificacion, @Id_Tipo_Destinatario, @Id_Estado, @Id_Area)";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id_Tipo", entity.Tipos, DbType.Int32);
+            parameters.Add("@Id_Tipo_Destinatarios",entity.Destinatarios ,DbType.Int32);
+            parameters.Add("@Id_Estado", entity.Estados, DbType.Int32);
+
             using (IDbConnection dbConnection = Connection)
             {
-                 dbConnection.Open();
-                 var result = await dbConnection.ExecuteAsync(sqlAdd, entity);
-                 return result;
+                dbConnection.Open();
+                var result = await dbConnection.ExecuteAsync(sqlAdd, entity);
+                return result;
             }
         }
 
-        public async Task<int> Borrar (int id)
+        public async Task<int> Borrar(int id)
         {
             var sqlDelete = "DELETE From TB_Memorandum Where Id = @Id";
             using (IDbConnection dbConnection = Connection)
             {
-                 dbConnection.Open();
-                 var result = await dbConnection.ExecuteAsync(sqlDelete, new { Id = id});
-                 return  result;
+                dbConnection.Open();
+                var result =
+                    await dbConnection.ExecuteAsync(sqlDelete, new { Id = id });
+                return result;
             }
         }
 
@@ -83,7 +96,6 @@ namespace Infraestructura.Repository
                 dbConnection.Open();
                 var result = await dbConnection.QueryAsync<Memorandum>(sql);
                 return result.ToList();
-                 
             }
         }
 
@@ -92,11 +104,12 @@ namespace Infraestructura.Repository
             var sql = "SELECT * FROM TB_Memorandum WHERE Id = @Id";
             using (IDbConnection dbConnection = Connection)
             {
-                 dbConnection.Open();
-                 var result = await dbConnection.QuerySingleOrDefaultAsync<Memorandum>(sql, new {Id = id});
-                 return result;
+                dbConnection.Open();
+                var result =
+                    await dbConnection
+                        .QuerySingleOrDefaultAsync<Memorandum>(sql,new { Id = id });
+                return result;
             }
         }
     }
-
 }

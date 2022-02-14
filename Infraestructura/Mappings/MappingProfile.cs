@@ -10,6 +10,7 @@ using Aplicacion.Adjuntos;
 using Aplicacion.Bitacoras;
 using Aplicacion.DestinatariosUsu.cs;
 using Aplicacion.Firmas;
+using Aplicacion.Usuarios;
 
 namespace Infraestructura.Mappings
 {
@@ -36,9 +37,11 @@ namespace Infraestructura.Mappings
         .ForMember(x=> x.Id_Tipo_Destinatario, y => y.MapFrom(z => z.Id));
         CreateMap<TipoMemorandum, TipoMemorandumDTO>()
         .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario))
+        .ForMember(x=> x.Descripcion, y=> y.MapFrom(z => z.Tipo))
         .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Tipo));       
         CreateMap<TipoMemorandumDTO, TipoMemorandum>()
         .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario))
+        .ForMember(x=> x.Tipo, y=> y.MapFrom(z => z.Descripcion))
         .ForMember(x=> x.Id_Tipo, y => y.MapFrom(z => z.Id));
         CreateMap<Memorandum, MemorandumDTO>()
         .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario));
@@ -74,6 +77,10 @@ namespace Infraestructura.Mappings
         .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario))
         .ForMember(x=> x.Firmas, y => y.MapFrom(z => z.FirmaUsu))
         .ForMember(x=> x.Id_Firma, y => y.MapFrom(z => z.Id));
+         CreateMap<Usuario, UsuarioDTO>()
+        .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Usuario));       
+        CreateMap<UsuarioDTO, Usuario>()
+        .ForMember(x=> x.Id_Usuario, y => y.MapFrom(z => z.Id));
 
 
         }

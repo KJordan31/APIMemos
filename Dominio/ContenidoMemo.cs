@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Dominio
 {
@@ -12,7 +13,7 @@ namespace Dominio
 
         public string SistemaUsuario {get;  set;}
 
-        public int Id {get; set;}       
+        public List<Memorandum> Memos {get; set;} = new List<Memorandum>();    
 
                 
 

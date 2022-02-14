@@ -7,7 +7,7 @@ namespace Aplicacion.Validadores
     {
         public TipoMemorandumDTOValidator()
         {
-            RuleFor(x => x.Tipo)
+            RuleFor(x => x.Descripcion)
             .NotEmpty().WithMessage("Este campo no puede venir vacio")
             .NotNull().WithMessage("No se aceptan valoress nulos");
         }

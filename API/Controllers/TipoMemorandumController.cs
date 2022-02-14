@@ -16,6 +16,7 @@ namespace API.Controllers
         private readonly IUnitOfWork unitOfWork;
 
         private readonly IMapper _mapper;
+
         public TipoMemorandumController (IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
@@ -47,6 +48,7 @@ namespace API.Controllers
             public async Task<IActionResult> GuardarTipo(TipoMemorandumDTO request)
             {
                var tipo = _mapper.Map<TipoMemorandum>(request);
+               
                 var resultado = await unitOfWork.Tipos.Agregar(tipo);
 
                 return Ok();

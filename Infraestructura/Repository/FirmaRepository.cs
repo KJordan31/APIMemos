@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -56,12 +57,28 @@ namespace Infraestructura.Repository
         {
             entity.Id_Firma = ObtenerUltimoID();
 
-            var sql = "Insert into TB_Firma(Id_Firma,Firmas, SistemaUsuario) Values(@Id_Firma,@Firmas, @SistemaUsuario)";
-            using (IDbConnection dbConnection = Connection)
+            var sql = "Insert into TB_Firma(Id_Firma,Firmas, SistemaUsuario, Id) Values(@Id_Firma,@Firmas, @SistemaUsuario, @Id)";
+            using (IDbConnection dbConnection  = Connection)
             {
                 dbConnection.Open();
-                var result = await dbConnection.ExecuteAsync(sql, entity);
-                return result;
+                using (var trans = dbConnection.BeginTransaction())
+                {
+                  var result = await dbConnection.ExecuteAsync(sql, entity, trans);
+
+                  try
+                  {
+                      await dbConnection.ExecuteAsync("Update dbo.TB_Memorandum set Id = 1",transaction: trans);
+                       trans.Commit();
+
+                  }catch (Exception ex)
+                  {
+                      Console.WriteLine($"Error: { ex.Message }");
+                      trans.Rollback();  
+                  }
+                 
+
+                return result;  
+                }                
                  
             }
         }

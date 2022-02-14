@@ -50,6 +50,14 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => 
+            {
+                options.WithOrigins("http://localhost:8080");
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+            });
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
