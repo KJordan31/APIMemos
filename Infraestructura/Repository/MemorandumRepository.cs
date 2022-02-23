@@ -58,7 +58,9 @@ namespace Infraestructura.Repository
         public async Task<int> Agregar(Memorandum entity)
         {
             // repo.destinatarios.agregar(entity.Destinatarios);
-            entity.Id = ObtenerUltimoID();
+            entity.Id = ObtenerUltimoID(); 
+
+                      
 
             var sqlAdd =
                 "Insert into TB_Memorandum(Id,Asunto, SistemaUsuario, Codigo,Id_Tipo, Fecha_Modificacion, Id_Tipo_Destinatario, Id_Estado, Id_Area) Values(@Id, @Asunto, @SistemaUsuario, @Codigo, @Id_Tipo, @Fecha_Modificacion, @Id_Tipo_Destinatario, @Id_Estado, @Id_Area)";

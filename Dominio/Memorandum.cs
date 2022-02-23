@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Dominio
 {
@@ -11,11 +10,17 @@ namespace Dominio
 
         public string SistemaUsuario { get; set; }
 
-        public List<TipoMemorandum> Tipos { get; set; } = new List<TipoMemorandum>();
+        public int? Id_Tipo { get; set; }
+
+        public virtual TipoMemorandum Tipos { get; set; }
 
         public string Asunto { get; set; }
 
-        public List<Estado> Estados { get; set; } = new List<Estado>();
+        public int? Id_Tipo_Destinatario { get; set; }
+
+        public int? Id_Estado { get; set; }
+
+        public virtual Estado Estados { get; set; }
 
         public int Id_Area { get; set; }
 
@@ -23,6 +28,6 @@ namespace Dominio
 
         public DateTime Fecha_Modificacion { get; set; }
 
-        public List<Destinatario> Destinatarios { get; set;} = new List<Destinatario>();
+        public virtual Destinatario Destinatarios { get; set; }
     }
 }

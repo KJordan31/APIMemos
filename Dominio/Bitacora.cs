@@ -13,6 +13,8 @@ namespace Dominio
 
         public string SistemaUsuario {get; set; }
 
-        public List<Accion> Acciones {get; set; } =  new List<Accion>();
+        public int? Id_Accion {get; set;}
+
+        public virtual Accion IdAcciones {get; set; }
     }
 }

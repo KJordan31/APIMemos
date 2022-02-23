@@ -44,6 +44,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> GuardarAccion(AccionDTO request)
         {
+
             var accion  = _mapper.Map<Accion>(request);
 
             var resultado = await unitOfWork.Acciones.Agregar(accion);

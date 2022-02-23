@@ -56,6 +56,10 @@ namespace Infraestructura.Repository
             entity.Id_Destinatario = ObtenerUltimoID();
 
             var sql = "Insert into TB_Destinatarios(Id_Destinatario, Usuario) Values (@Id_Destinatario,@Usuario)";
+
+             var parameters = new DynamicParameters();
+            parameters.Add("@Id", entity.IdMemos, DbType.Int32);
+
             using (IDbConnection dbConnection = Connection)
             {
              dbConnection.Open();

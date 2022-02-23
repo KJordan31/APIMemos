@@ -13,7 +13,9 @@ namespace Dominio
 
         public string SistemaUsuario {get;  set;}
 
-        public List<Memorandum> Memos {get; set;} = new List<Memorandum>();    
+        public int? Id {get; set;}
+
+        public virtual Memorandum IdMemos {get; set;}    
 
                 
 

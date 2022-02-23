@@ -7,7 +7,9 @@ namespace Dominio
     {
         public int Id_Firma { get; set; }
 
-        public List<Memorandum> Memos { get; set; } = new List<Memorandum>();
+        public int? Id {get; set;}
+
+        public virtual Memorandum IdMemos { get; set; } 
 
         public string Firmas { get; set; }
 

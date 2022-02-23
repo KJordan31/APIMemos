@@ -4,11 +4,14 @@ namespace Aplicacion.Memos
     {
 
         public int Id { get; set;}
+
         public string Usuario {get; set;}
 
         public string Asunto {get; set;}
 
         public string Codigo {get; set;}
+
+        public string Fecha {get; set;}
 
         
     }

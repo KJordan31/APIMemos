@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+
 
 namespace Dominio
 {
@@ -8,7 +8,9 @@ namespace Dominio
 
         public int Id_Destinatario {get; set; }
 
-        public List<Memorandum> Memos {get; set; } = new List<Memorandum>();
+        public int? Id {get; set;}
+
+        public virtual Memorandum IdMemos {get; set; } 
 
         public string SistemaUsuario {get; set; }
 
@@ -16,7 +18,7 @@ namespace Dominio
 
         public string Usuario {get; set; }
 
-        public Memorandum Memorandum { get; set; }
+       
 
         
     }

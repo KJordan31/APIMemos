@@ -46,6 +46,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+       
 
         public async Task<IActionResult> GuardarAdjunto(AdjuntoDTO request)
         {
@@ -61,7 +62,7 @@ namespace API.Controllers
             var existeAdjunto = await unitOfWork.Adjuntos.ObtenerPorId(id);
             if (existeAdjunto is null) return NotFound($"No se puedo Actualizar el recurso con Id {id} porque no existe");       
             
-            request.Id = id;
+            request.id = id;
             var actualizarAdjunto = _mapper.Map<Adjunto>(request);
             await unitOfWork.Adjuntos.Actualizar(actualizarAdjunto);
             return Ok();

@@ -57,31 +57,19 @@ namespace Infraestructura.Repository
         {
             entity.Id_Firma = ObtenerUltimoID();
 
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", entity.IdMemos, DbType.Int32);
+
             var sql = "Insert into TB_Firma(Id_Firma,Firmas, SistemaUsuario, Id) Values(@Id_Firma,@Firmas, @SistemaUsuario, @Id)";
             using (IDbConnection dbConnection  = Connection)
             {
                 dbConnection.Open();
-                using (var trans = dbConnection.BeginTransaction())
-                {
-                  var result = await dbConnection.ExecuteAsync(sql, entity, trans);
-
-                  try
-                  {
-                      await dbConnection.ExecuteAsync("Update dbo.TB_Memorandum set Id = 1",transaction: trans);
-                       trans.Commit();
-
-                  }catch (Exception ex)
-                  {
-                      Console.WriteLine($"Error: { ex.Message }");
-                      trans.Rollback();  
-                  }
+              var result = await dbConnection.ExecuteAsync(sql, entity);                         
+              return result;  
+            }                
                  
-
-                return result;  
-                }                
-                 
-            }
         }
+        
 
         public async Task<int> Borrar(int id)
         {

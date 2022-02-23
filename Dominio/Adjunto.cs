@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
@@ -7,12 +8,15 @@ namespace Dominio
     {
         public int Id_Adjuntos { get; set; }
 
+        public int? Id { get; set; }
+
         public string Adjuntos { get; set; }
 
         public DateTime SistemaFecha { get; set; }
 
-        public string SistemaUsuario { get; set; }
-
-        public List<Memorandum> Memos { get; set;} = new List<Memorandum>();
+        public string SistemaUsuario { get; set; } 
+       
+        public virtual Memorandum IdMemos {get; set;}
     }
 }
+  
