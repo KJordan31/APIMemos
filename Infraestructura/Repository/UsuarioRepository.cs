@@ -115,5 +115,33 @@ namespace Infraestructura.Repository
                 return resultado.FirstOrDefault();
             }
         }
+
+        public async Task<Usuario> ObtenerPorCorreo(string correo)
+        {
+            var query = "SELECT Correo From TB_Usuarios WHERE Correo=@Correo";
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                var resultado =
+                    await dbConnection
+                        .QueryAsync<Usuario>(query, new { Correo = correo });
+                return resultado.FirstOrDefault();
+            }
+        }
+
+        public async Task<Usuario> LoginAsync(string correo, string contraseña)
+        {
+            var usuario =
+                "SELECT Correo, Contraseña From TB_Usuarios WHERE Correo=@Correo AND Contraseña=@Contraseña";
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                var result =
+                    await dbConnection
+                        .QueryAsync<Usuario>(usuario,
+                        new { Correo = correo, Contraseña = contraseña });
+                return result.FirstOrDefault();
+            }
+        }
     }
 }

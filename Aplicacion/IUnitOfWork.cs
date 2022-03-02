@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Aplicacion.Acciones;
 using Aplicacion.Adjuntos;
 using Aplicacion.Bitacoras;
@@ -9,6 +10,8 @@ using Aplicacion.Firmas;
 using Aplicacion.Memos;
 using Aplicacion.Tipos;
 using Aplicacion.Usuarios;
+using Dominio;
+using Microsoft.AspNetCore.Identity;
 
 namespace Aplicacion
 {
@@ -35,5 +38,6 @@ namespace Aplicacion
         IFirmaRepository Firmas { get; }
 
         IUsuarioRepository Usuarios { get; }
+
     }
 }

@@ -4,24 +4,37 @@ using Aplicacion;
 using Aplicacion.Usuarios;
 using AutoMapper;
 using Dominio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Controllers
 {
     [ApiController]
     [Route("api/usuario")]
+    
+    
+    
 
     public class UsuarioController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
 
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapper;   
+
+        private readonly IConfiguration config;
+     
+        
+       
 
         public UsuarioController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             _mapper = mapper;
+           
+           
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetListado()
@@ -74,6 +87,48 @@ namespace API.Controllers
 
             return NoContent();
         }
+
+
+
+        [HttpPost("login")] 
+        [AllowAnonymous]       
+        public async Task<IActionResult> Login(LoginVM usuario)
+        {
+            var existeUsu = await unitOfWork.Usuarios.ObtenerPorCorreo(usuario.Correo);
+            if (existeUsu is null)
+            {
+                return NotFound($"No se encontro el usuario con correo: {usuario.Correo}");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var result = await unitOfWork.Usuarios.LoginAsync(usuario.Correo, usuario.Contraseña);
+
+                if (!result.Succeeded)
+                {
+                    return Ok(result);
+                }
+                return NotFound($"Usuario incorrecto");
+
+            }
+            return BadRequest(ModelState);
+
+        }
+
+        [HttpGet("login")]
+        public async Task<IActionResult> Login(string correo)
+        {
         
+            var data = await unitOfWork.Usuarios.ObtenerPorCorreo(correo);
+
+            if ( data == null ) return NotFound($"No se encontró un recurso con el correo: {correo}");
+            var dataDTO = _mapper.Map<UsuarioDTO>(data);
+            return Ok(dataDTO);
+
+        }
+
+
+
     }
+
 }

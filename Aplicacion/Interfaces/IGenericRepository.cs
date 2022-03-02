@@ -7,7 +7,7 @@ namespace Aplicacion.Interfaces
     {
          Task<T> ObtenerPorId(int id);
 
-         Task<IReadOnlyList<T>> ObtenerListado();
+         Task<IReadOnlyList<T>> ObtenerListado();         
 
          Task<int> Agregar(T entity);
 

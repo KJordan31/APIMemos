@@ -10,6 +10,9 @@ using Aplicacion.DestinatariosUsu;
 using Aplicacion.Firmas;
 using Aplicacion.Adjuntos;
 using Aplicacion.Usuarios;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Dominio;
 
 namespace Infraestructura.Repository
 {
@@ -57,5 +60,7 @@ namespace Infraestructura.Repository
         public IFirmaRepository Firmas {get; }
 
         public IUsuarioRepository Usuarios { get;}
+
+     
     }
 }
