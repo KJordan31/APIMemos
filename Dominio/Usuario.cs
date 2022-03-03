@@ -25,8 +25,6 @@ namespace Dominio
         [Compare("Contraseña", ErrorMessage = "Las contraseñas no coinciden")]
         [NotMapped]
         public string ConfirmarContraseña { get; set; }
-
-        public string Token { get; set; }
         public bool Succeeded { get; set; }
     }
 }

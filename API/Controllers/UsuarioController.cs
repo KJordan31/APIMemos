@@ -94,7 +94,7 @@ namespace API.Controllers
         [AllowAnonymous]       
         public async Task<IActionResult> Login(LoginVM usuario)
         {
-            var existeUsu = await unitOfWork.Usuarios.ObtenerPorCorreo(usuario.Correo);
+            var existeUsu = await unitOfWork.Usuarios.LoginAsync(usuario.Correo, usuario.Contraseña);
             if (existeUsu is null)
             {
                 return NotFound($"No se encontro el usuario con correo: {usuario.Correo}");
@@ -116,10 +116,10 @@ namespace API.Controllers
         }
 
         [HttpGet("login")]
-        public async Task<IActionResult> Login(string correo)
+        public async Task<IActionResult> Login(string correo, string contraseña)
         {
         
-            var data = await unitOfWork.Usuarios.ObtenerPorCorreo(correo);
+            var data = await unitOfWork.Usuarios.LoginAsync(correo, contraseña);
 
             if ( data == null ) return NotFound($"No se encontró un recurso con el correo: {correo}");
             var dataDTO = _mapper.Map<UsuarioDTO>(data);
