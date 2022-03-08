@@ -59,16 +59,16 @@ namespace Infraestructura.Repository
         {
             // repo.destinatarios.agregar(entity.Destinatarios);
             entity.Id = ObtenerUltimoID(); 
-
+             
                       
 
             var sqlAdd =
-                "Insert into TB_Memorandum(Id,Asunto, SistemaUsuario, Codigo,Id_Tipo, Fecha_Modificacion, Id_Tipo_Destinatario, Id_Estado, Id_Area) Values(@Id, @Asunto, @SistemaUsuario, @Codigo, @Id_Tipo, @Fecha_Modificacion, @Id_Tipo_Destinatario, @Id_Estado, @Id_Area)";
+                "Insert into TB_Memorandum(Id,Asunto, SistemaUsuario, Codigo,Id_Tipo, Id_Tipo_Destinatario, Id_Estado, Id_Area, DestinatarioUsu) Values(@Id, @Asunto, @SistemaUsuario, @Codigo, @Id_Tipo,  @Id_Tipo_Destinatario, @Id_Estado, @Id_Area, @DestinatarioUsu)";
 
             var parameters = new DynamicParameters();
-            parameters.Add("@Id_Tipo", entity.Tipos, DbType.Int32);
-            parameters.Add("@Id_Tipo_Destinatarios",entity.Destinatarios ,DbType.Int32);
-            parameters.Add("@Id_Estado", entity.Estados, DbType.Int32);
+            parameters.Add("@Id_Tipo", entity.TipoMemorandum, DbType.Int32);
+            parameters.Add("@Id_Tipo_Destinatarios",entity.Destinatario ,DbType.Int32);
+            parameters.Add("@Id_Estado", entity.Estado, DbType.Int32);
 
             using (IDbConnection dbConnection = Connection)
             {

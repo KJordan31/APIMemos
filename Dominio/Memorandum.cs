@@ -12,15 +12,17 @@ namespace Dominio
 
         public int? Id_Tipo { get; set; }
 
-        public virtual TipoMemorandum Tipos { get; set; }
+        public virtual TipoMemorandum TipoMemorandum { get; set; }
 
         public string Asunto { get; set; }
+
+        public string DestinatarioUsu { get; set; }
 
         public int? Id_Tipo_Destinatario { get; set; }
 
         public int? Id_Estado { get; set; }
 
-        public virtual Estado Estados { get; set; }
+        public virtual Estado Estado { get; set; }
 
         public int Id_Area { get; set; }
 
@@ -28,6 +30,6 @@ namespace Dominio
 
         public DateTime Fecha_Modificacion { get; set; }
 
-        public virtual Destinatario Destinatarios { get; set; }
+        public virtual Destinatario Destinatario { get; set; }
     }
 }

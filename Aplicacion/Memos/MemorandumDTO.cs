@@ -13,6 +13,8 @@ namespace Aplicacion.Memos
 
         public string Fecha {get; set;}
 
+        public string DestinatarioUsu {get; set;}
+
         
     }
 }

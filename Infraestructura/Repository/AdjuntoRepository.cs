@@ -65,7 +65,7 @@ namespace Infraestructura.Repository
                 "Insert into TB_Adjuntos(Id_Adjuntos, Adjuntos, SistemaUsuario, Id) Values (@Id_Adjuntos, @Adjuntos, @SistemaUsuario, @Id)";
 
             var parameters = new DynamicParameters();
-            parameters.Add("Id", entity.IdMemos, DbType.Int32);
+            parameters.Add("Id", entity.Id, DbType.Int32);
 
             using (IDbConnection dbConnection = Connection)
             {

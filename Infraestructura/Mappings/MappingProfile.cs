@@ -57,10 +57,10 @@ namespace Infraestructura.Mappings
         .ForMember(x=> x.Id_Contenido, y => y.MapFrom(z => z.ID));
          CreateMap<Adjunto, AdjuntoDTO>()
         .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario))
-        .ForMember(x=> x.id, y=> y.MapFrom(z => z.Id_Adjuntos));       
+        .ForMember(x=> x.id_ad, y=> y.MapFrom(z => z.Id_Adjuntos));       
         CreateMap<AdjuntoDTO, Adjunto>()
         .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario))
-        .ForMember(x=> x.Id_Adjuntos, y => y.MapFrom(z => z.id));
+        .ForMember(x=> x.Id_Adjuntos, y => y.MapFrom(z => z.id_ad));
         CreateMap<Bitacora, BitacoraDTO>()
         .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario))
         .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Bitacora));       

@@ -62,7 +62,7 @@ namespace API.Controllers
             var existeAdjunto = await unitOfWork.Adjuntos.ObtenerPorId(id);
             if (existeAdjunto is null) return NotFound($"No se puedo Actualizar el recurso con Id {id} porque no existe");       
             
-            request.id = id;
+            request.id_ad = id;
             var actualizarAdjunto = _mapper.Map<Adjunto>(request);
             await unitOfWork.Adjuntos.Actualizar(actualizarAdjunto);
             return Ok();
