@@ -66,7 +66,7 @@ namespace Infraestructura.Repository
                 "Insert into TB_Contenido(Id_Contenido,Contenido, SistemaUsuario) Values(@Id_Contenido,@Contenido, @SistemaUsuario)";
 
             var parameters = new DynamicParameters();
-            parameters.Add("@Id", entity.IdMemos, DbType.Int32);
+            parameters.Add("@Id", entity.Id, DbType.Int32);
 
             using (IDbConnection dbConnecion = Connection)
             {

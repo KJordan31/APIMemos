@@ -58,16 +58,17 @@ namespace Infraestructura.Repository
         public async Task<int> Agregar(Memorandum entity)
         {
             // repo.destinatarios.agregar(entity.Destinatarios);
-            entity.Id = ObtenerUltimoID(); 
-             
-                      
+            entity.Id = ObtenerUltimoID();
 
             var sqlAdd =
                 "Insert into TB_Memorandum(Id,Asunto, SistemaUsuario, Codigo,Id_Tipo, Id_Tipo_Destinatario, Id_Estado, Id_Area, DestinatarioUsu) Values(@Id, @Asunto, @SistemaUsuario, @Codigo, @Id_Tipo,  @Id_Tipo_Destinatario, @Id_Estado, @Id_Area, @DestinatarioUsu)";
 
             var parameters = new DynamicParameters();
             parameters.Add("@Id_Tipo", entity.TipoMemorandum, DbType.Int32);
-            parameters.Add("@Id_Tipo_Destinatarios",entity.Destinatario ,DbType.Int32);
+            parameters
+                .Add("@Id_Tipo_Destinatarios",
+                entity.Destinatario,
+                DbType.Int32);
             parameters.Add("@Id_Estado", entity.Estado, DbType.Int32);
 
             using (IDbConnection dbConnection = Connection)
@@ -92,11 +93,40 @@ namespace Infraestructura.Repository
 
         public async Task<IReadOnlyList<Memorandum>> ObtenerListado()
         {
+            // var sql = "SELECT * FROM TB_Memorandum";
+            // var sql =
+            //     @"SELECT a.*, b.*
+            //       FROM TB_Memorandum a
+            //             inner join TB_Contenido b on a.Id = b.Id";
+            // using (IDbConnection dbConnection = Connection)
+            // {
+            //     dbConnection.Open();
+            //     var result =
+            //         await dbConnection
+            //             .QueryAsync<Memorandum, ContenidoMemo, Memorandum>(sql,
+            //             (memo, contentMemo) =>
+            //             {
+            //                 memo.Texto = contentMemo;
+            //                 return memo;
+            //             },
+            //             splitOn: "Id");
             var sql = "SELECT * FROM TB_Memorandum";
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
                 var result = await dbConnection.QueryAsync<Memorandum>(sql);
+
+                var contenido =
+                    await dbConnection
+                        .QueryAsync
+                        <ContenidoMemo>("Select * from TB_Contenido");
+
+                foreach (var memo in result)
+                {
+                    memo.Contenido =
+                        contenido.FirstOrDefault(x => x.Id == memo.Id);
+                }
+
                 return result.ToList();
             }
         }
@@ -109,7 +139,8 @@ namespace Infraestructura.Repository
                 dbConnection.Open();
                 var result =
                     await dbConnection
-                        .QuerySingleOrDefaultAsync<Memorandum>(sql,new { Id = id });
+                        .QuerySingleOrDefaultAsync<Memorandum>(sql,
+                        new { Id = id });
                 return result;
             }
         }

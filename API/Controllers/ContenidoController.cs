@@ -63,7 +63,7 @@ namespace API.Controllers
 
             if (existeContenido is null) return NotFound($"No se puede Actualizar el recurso con id {id} porque no existe");
 
-            request.ID = id;
+            request.Id_Contenido = id;
             
             var actualizarContenido = _mapper.Map<ContenidoMemo>(request);
 

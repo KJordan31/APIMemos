@@ -5,20 +5,14 @@ namespace Dominio
 {
     public class ContenidoMemo
     {
-        public int Id_Contenido {get; set; }
+        public int Id_Contenido { get; set; }
 
-        public string Contenido {get; set;}
+        public string Contenido { get; set; }
 
-        public DateTime SistemaFecha {get; set;}
+        public DateTime SistemaFecha { get; set; }
 
-        public string SistemaUsuario {get;  set;}
+        public string SistemaUsuario { get; set; }
 
-        public int? Id {get; set;}
-
-        public virtual Memorandum IdMemos {get; set;}    
-
-                
-
+        public int Id { get; set; }
     }
-    
 }

@@ -31,5 +31,7 @@ namespace Dominio
         public DateTime Fecha_Modificacion { get; set; }
 
         public virtual Destinatario Destinatario { get; set; }
+
+        public virtual ContenidoMemo Contenido { get; set; }
     }
 }
