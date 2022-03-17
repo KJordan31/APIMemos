@@ -77,6 +77,7 @@ namespace API.Controllers
             }
 
             var resultado = await unitOfWork.Plantillas.Borrar(id);
+        
 
             return NoContent();
         }
