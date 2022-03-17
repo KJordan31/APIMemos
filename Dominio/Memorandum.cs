@@ -33,5 +33,7 @@ namespace Dominio
         public virtual Destinatario Destinatario { get; set; }
 
         public virtual ContenidoMemo Contenido { get; set; }
+
+        public virtual int Count { get; }
     }
 }

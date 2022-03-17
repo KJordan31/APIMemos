@@ -62,6 +62,8 @@ namespace Infraestructura.Repository
             }
         }
 
+        
+        
         public async Task<int> Agregar(Usuario entity)
         {
             entity.Id_Usuario = ObtenerUltimoID();

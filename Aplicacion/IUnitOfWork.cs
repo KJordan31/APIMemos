@@ -8,10 +8,10 @@ using Aplicacion.DestinatariosUsu;
 using Aplicacion.Estados;
 using Aplicacion.Firmas;
 using Aplicacion.Memos;
+using Aplicacion.Plantillas;
 using Aplicacion.Tipos;
 using Aplicacion.Usuarios;
-using Dominio;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace Aplicacion
 {
@@ -38,6 +38,8 @@ namespace Aplicacion
         IFirmaRepository Firmas { get; }
 
         IUsuarioRepository Usuarios { get; }
+
+        IPlantillaRepository Plantillas {get;}
 
     }
 }

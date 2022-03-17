@@ -22,7 +22,7 @@ namespace API.Controllers
 
         private readonly IMapper _mapper;   
 
-        private readonly IConfiguration config;
+        
      
         
        
@@ -73,6 +73,8 @@ namespace API.Controllers
              await unitOfWork.Usuarios.Actualizar(actualizarUsuario);
              return Ok();
         }
+
+     
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

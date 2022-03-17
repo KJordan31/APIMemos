@@ -11,6 +11,7 @@ using Aplicacion.Bitacoras;
 using Aplicacion.DestinatariosUsu.cs;
 using Aplicacion.Firmas;
 using Aplicacion.Usuarios;
+using Apliacacion.Plantillas;
 
 namespace Infraestructura.Mappings
 {
@@ -89,6 +90,11 @@ namespace Infraestructura.Mappings
         .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Usuario));       
         CreateMap<UsuarioDTO, Usuario>()
         .ForMember(x=> x.Id_Usuario, y => y.MapFrom(z => z.Id));
+
+         CreateMap<Plantilla, PlantillaDTO>()
+        .ForMember(x=> x.id, y=> y.MapFrom(z => z.Id));       
+        CreateMap<PlantillaDTO, Plantilla>()
+        .ForMember(x=> x.Id, y => y.MapFrom(z => z.id));
 
 
         }

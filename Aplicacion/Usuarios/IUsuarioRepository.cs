@@ -9,7 +9,5 @@ namespace Aplicacion.Usuarios
     {
 
         Task<Usuario> LoginAsync(string correo, string contraseña);
-       
-        
     }
 }

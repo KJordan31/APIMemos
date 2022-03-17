@@ -12,6 +12,7 @@ using Aplicacion.DestinatariosUsu;
 using Aplicacion.Firmas;
 using Aplicacion.Adjuntos;
 using Aplicacion.Usuarios;
+using Aplicacion.Plantillas;
 
 namespace Infraestructura
 {
@@ -30,6 +31,7 @@ namespace Infraestructura
             services.AddTransient<IDestinatarioRepository, DestinatarioRepository>();
             services.AddTransient<IFirmaRepository, FirmaRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IPlantillaRepository, PlantillaRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }
