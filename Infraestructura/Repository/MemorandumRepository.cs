@@ -117,9 +117,7 @@ namespace Infraestructura.Repository
                 var result = await dbConnection.QueryAsync<Memorandum>(sql);
 
                 var contenido =
-                    await dbConnection
-                        .QueryAsync
-                        <ContenidoMemo>("Select * from TB_Contenido");
+                    await dbConnection.QueryAsync<ContenidoMemo>("Select * from TB_Contenido");
 
                 foreach (var memo in result)
                 {
@@ -137,11 +135,16 @@ namespace Infraestructura.Repository
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                var result =
-                    await dbConnection
-                        .QuerySingleOrDefaultAsync<Memorandum>(sql,
-                        new { Id = id });
-                return result;
+                var result =  await dbConnection.QueryAsync<Memorandum>(sql,new { Id = id });
+                  var contenido = await dbConnection.QueryAsync<ContenidoMemo>("Select * from TB_Contenido");
+
+                foreach (var memo in result)
+                {
+                    memo.Contenido =
+                        contenido.FirstOrDefault(x => x.Id == memo.Id);
+                }
+
+                return result.FirstOrDefault();
             }
         }
 

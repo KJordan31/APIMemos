@@ -35,5 +35,7 @@ namespace Dominio
         public virtual ContenidoMemo Contenido { get; set; }
 
         public virtual int Count { get; }
+
+        public int Id_Bitacora { get; set; }
     }
 }

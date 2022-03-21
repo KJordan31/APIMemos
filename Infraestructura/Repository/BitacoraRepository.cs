@@ -56,7 +56,7 @@ namespace Infraestructura.Repository
         {
             entity.Id_Bitacora = ObtenerUltimoID();
 
-            var sql = "Insert into TB_Bitacora(Id_Bitacora, Observacion, SitemaUsuario, Id_Accion) Values(@Id_Bitacora,@Observacion, @SistemaUsuario, @Id_Accion)";
+            var sql = "Insert into TB_Bitacora(Id_Bitacora, Observacion, SitemaUsuario, Id_Accion, Id_Memorandum) Values(@Id_Bitacora,@Observacion, @SistemaUsuario, @Id_Accion, @Id_Memorandum)";
 
             var parameters = new DynamicParameters();
             parameters.Add("@Id_Accion", entity.IdAcciones, DbType.Int32);
@@ -89,7 +89,18 @@ namespace Infraestructura.Repository
             {
                  dbConnection.Open();
                  var resultado =  await dbConnection.QueryAsync<Bitacora>(query);
-                 return resultado.ToList();
+                  var estado = await dbConnection.QueryAsync<Estado>("Select * from TB_Estado");
+                   var memo = await dbConnection.QueryAsync<Memorandum>("Select * from TB_Memorandum");
+
+                foreach (var bitacora in resultado)
+                {
+                    bitacora.Estado =
+                        estado.FirstOrDefault(x => x.Id_Estado == bitacora.Id_Estado);
+                    bitacora.Memorandum =
+                        memo.FirstOrDefault(x => x.Id == bitacora.Id_Memorandum);
+                }
+               
+                 return resultado.ToList(); 
             }
         }
 
