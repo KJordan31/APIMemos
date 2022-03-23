@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using Aplicacion;
 using Aplicacion.Bitacoras;
 using AutoMapper;
+using Dapper;
 using Dominio;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Controllers
 {
@@ -17,10 +21,23 @@ namespace API.Controllers
 
         private readonly IMapper _mapper;
 
-        public BitacoraController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IConfiguration configuration;
+
+        public BitacoraController(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration)
         {
+            this.configuration = configuration;
             this.unitOfWork = unitOfWork;
             _mapper = mapper;
+            
+        }
+
+         public IDbConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(configuration
+                        .GetConnectionString("DefaultConnection"));
+            }
         }
 
         [HttpGet]
@@ -84,6 +101,8 @@ namespace API.Controllers
 
             return NoContent();
         }
+
+        
 
 
     }

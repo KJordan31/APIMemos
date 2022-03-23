@@ -15,7 +15,7 @@ namespace Aplicacion.Bitacoras
 
          public int Id_Memorandum {get; set;}
 
-         public string Fecha {get;set;}
+         public string Fecha_Bitacora {get;set;}
 
          public int Id_Estado {get;set;}
 

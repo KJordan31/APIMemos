@@ -84,7 +84,8 @@ namespace Infraestructura.Repository
 
         public async Task<IReadOnlyList<Bitacora>> ObtenerListado()
         {
-            var query = "SELECT * FROM TB_Bitacora";
+            var query = @" SELECT * FROM TB_Bitacora a 
+WHERE Id_Bitacora IN (SELECT MAX(Id_Bitacora) FROM TB_Bitacora GROUP BY Id_Memorandum) ORDER BY Id_Memorandum DESC";
             using (IDbConnection dbConnection = Connection)
             {
                  dbConnection.Open();

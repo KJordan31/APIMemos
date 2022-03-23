@@ -70,11 +70,11 @@ namespace Infraestructura.Mappings
         .ForMember(x=> x.Id_Adjuntos, y => y.MapFrom(z => z.id_ad));
         CreateMap<Bitacora, BitacoraDTO>()
         .ForMember(x=> x.Usuario, y=> y.MapFrom(z => z.SistemaUsuario))
-        .ForMember(x=> x.Fecha, y=> y.MapFrom(z => z.SistemaFecha))
+        .ForMember(x=> x.Fecha_Bitacora, y=> y.MapFrom(z => z.SistemaFecha))
         .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Bitacora));       
         CreateMap<BitacoraDTO, Bitacora>()
         .ForMember(x=> x.SistemaUsuario, y => y.MapFrom(z => z.Usuario))
-        .ForMember(x=> x.SistemaFecha, y => y.MapFrom(z => z.Fecha))
+        .ForMember(x=> x.SistemaFecha, y => y.MapFrom(z => z.Fecha_Bitacora))
         .ForMember(x=> x.Id_Bitacora, y => y.MapFrom(z => z.Id));
         CreateMap<Destinatario, DestinatarioDTO>()
         .ForMember(x=> x.Id, y=> y.MapFrom(z => z.Id_Destinatario));       
