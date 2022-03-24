@@ -38,8 +38,7 @@ namespace API.Controllers
         public IActionResult GetProfileCount(string profileId, int id)
         {
             var sql =
-                @"SELECT * FROM TB_Bitacora a INNER JOIN TB_Memorandum c ON a.Id_Memorandum = c.Id
-                  INNER JOIN TB_Estado b ON a.Id_Estado = b.Id_Estado
+                @"SELECT * FROM TB_Bitacora a 
                 WHERE Id_Memorandum
                 IN (SELECT Id_Memorandum FROM TB_Bitacora where Id_Memorandum = @Id_Memorandum				
                 GROUP BY Id_Memorandum HAVING count(Id_Memorandum) >1)
@@ -49,10 +48,17 @@ namespace API.Controllers
             {
                 dbConnection.Open();
 
-                var profileCount =
-                    dbConnection
-                        .Query(sql, new { Id_Memorandum = id })
-                        .ToList();
+                var profileCount = dbConnection.Query(sql, new { Id_Memorandum = id }).ToList();
+                 var estado =  dbConnection.Query("Select * from TB_Estado").ToList();
+                   var memo =  dbConnection.Query("Select * from TB_Memorandum").ToList();
+
+                foreach (var bitacora in profileCount)
+                {
+                    bitacora.Estado =
+                        estado.FirstOrDefault(x => x.Id_Estado == bitacora.Id_Estado);
+                    bitacora.Memorandum =
+                        memo.FirstOrDefault(x => x.Id == bitacora.Id_Memorandum);
+                }
                 return Ok(profileCount);
             }
         }

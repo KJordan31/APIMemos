@@ -56,7 +56,7 @@ namespace Infraestructura.Repository
         {
             entity.Id_Bitacora = ObtenerUltimoID();
 
-            var sql = "Insert into TB_Bitacora(Id_Bitacora, Observacion, SitemaUsuario, Id_Accion, Id_Memorandum) Values(@Id_Bitacora,@Observacion, @SistemaUsuario, @Id_Accion, @Id_Memorandum)";
+            var sql = "Insert into TB_Bitacora(Id_Bitacora, Observacion, SistemaUsuario, Id_Estado, Id_Memorandum, Id_Accion ) Values(@Id_Bitacora,@Observacion, @SistemaUsuario, @Id_Estado, @Id_Memorandum, @Id_Accion)";
 
             var parameters = new DynamicParameters();
             parameters.Add("@Id_Accion", entity.IdAcciones, DbType.Int32);
