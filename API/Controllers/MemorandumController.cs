@@ -40,6 +40,7 @@ namespace API.Controllers
             return Ok(dataDTO);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> GuardarMemorandum(MemorandumDTO request)
         {
@@ -48,7 +49,7 @@ namespace API.Controllers
 
             var resultado = await unitOfWork.Memos.Agregar(Memorandum);
 
-            return Ok();
+            return Ok(resultado);
         }
 
         [HttpPut("{id}")]

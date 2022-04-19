@@ -29,8 +29,7 @@ namespace API.Controllers
         {
             get
             {
-                return new SqlConnection(configuration
-                        .GetConnectionString("DefaultConnection"));
+                return new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
             }
         }
 

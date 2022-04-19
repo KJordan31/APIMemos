@@ -63,7 +63,7 @@ namespace Infraestructura.Repository
             entity.Id_Contenido = ObtenerUltimoID();
 
             var sqlAdd =
-                "Insert into TB_Contenido(Id_Contenido,Contenido, SistemaUsuario) Values(@Id_Contenido,@Contenido, @SistemaUsuario)";
+                "Insert into TB_Contenido(Id_Contenido,Contenido, SistemaUsuario,Id) Values(@Id_Contenido,@Contenido, @SistemaUsuario, @Id)";
 
             var parameters = new DynamicParameters();
             parameters.Add("@Id", entity.Id, DbType.Int32);

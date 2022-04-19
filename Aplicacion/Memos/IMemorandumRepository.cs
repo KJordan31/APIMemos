@@ -7,6 +7,8 @@ namespace Aplicacion.Memos
 {
     public interface IMemorandumRepository : IGenericRepository<Memorandum>
     {
-     
+        Task<Memorandum> ObtenerPorNombre(string destinatarioUsu);
+
+       
     }
 }

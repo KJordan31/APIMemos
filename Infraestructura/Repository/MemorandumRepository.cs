@@ -73,10 +73,12 @@ namespace Infraestructura.Repository
 
             using (IDbConnection dbConnection = Connection)
             {
+               
                 dbConnection.Open();
-                var result = await dbConnection.ExecuteAsync(sqlAdd, entity);
-                return result;
+                var result = await dbConnection.ExecuteAsync(sqlAdd, entity);               
+                return entity.Id;
             }
+
         }
 
         public async Task<int> Borrar(int id)
@@ -148,8 +150,25 @@ namespace Infraestructura.Repository
             }
         }
 
+               public async Task<Memorandum> ObtenerPorNombre(string DestinatarioUsu)
+        {
+            var sql = "SELECT * FROM TB_Memorandum WHERE DestinatarioUsu = @DestinatarioUsu";
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                var result =  await dbConnection.QueryAsync<Memorandum>(sql,new { DestinatarioUsu = DestinatarioUsu });
+                  var contenido = await dbConnection.QueryAsync<ContenidoMemo>("Select * from TB_Contenido");
 
+                foreach (var memo in result)
+                {
+                    memo.Contenido =
+                        contenido.FirstOrDefault(x => x.Id == memo.Id);
+                }
 
-      
+                return result.FirstOrDefault();
+            }
+        }
+
+     
     }
 }
