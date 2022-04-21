@@ -43,7 +43,7 @@ namespace Infraestructura.Repository
         public async Task<int> Actualizar(Usuario entity)
         {
             var sqlActualizar =
-                "UPDATE TB_Usuarios set Nombre = @Nombre, Apellidos = @Apellidos, Correo = @Correo, Contraseña = @Contraseña, Super_Usuario = @Super_Usuario where Id_Usuario = @Id_Usuario";
+                "UPDATE TB_Usuarios set Nombre = @Nombre, Apellidos = @Apellidos, Correo = @Correo, Contraseña = @Contraseña, Super_Usuario = @Super_Usuario,Tipo = @Tipo where Id_Usuario = @Id_Usuario";
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
@@ -56,7 +56,8 @@ namespace Infraestructura.Repository
                             Correo = entity.Correo,
                             Contraseña = entity.Contraseña,
                             Super_Usuario = entity.Super_Usuario,
-                            Id_Usuario = entity.Id_Usuario
+                            Id_Usuario = entity.Id_Usuario,
+                            Tipo = entity.Tipo
                         });
                 return result;
             }
@@ -69,7 +70,7 @@ namespace Infraestructura.Repository
             entity.Id_Usuario = ObtenerUltimoID();
 
             var queryAdd =
-                "INSERT INTO TB_Usuarios(Id_Usuario, Nombre, Apellidos, Correo, Contraseña, Super_Usuario) Values (@Id_Usuario, @Nombre, @Apellidos, @Correo, @Contraseña,@Super_Usuario)";
+                "INSERT INTO TB_Usuarios(Id_Usuario, Nombre, Apellidos, Correo, Contraseña, Super_Usuario, Tipo) Values (@Id_Usuario, @Nombre, @Apellidos, @Correo, @Contraseña,@Super_Usuario,@Tipo)";
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();

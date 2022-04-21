@@ -17,6 +17,8 @@ namespace Dominio
         
         public string Correo { get; set; }
 
+        public string Tipo { get; set; }
+
         public DateTime SistemaFecha { get; set; }
 
         

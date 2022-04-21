@@ -12,6 +12,8 @@ namespace Aplicacion.Usuarios
 
         public string Contraseña { get; set; }
 
+        public string Tipo { get; set; }
+
         public bool Super_Usuario { get; set; }
     }
 }

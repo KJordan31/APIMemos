@@ -55,7 +55,7 @@ namespace Infraestructura.Repository
           public async Task<int> Agregar(TipoMemorandum entity)
         {
 
-            entity.Id_Tipo = ObtenerUltimoID();
+            entity.Id_Tipo = ObtenerUltimoID() +1;
 
             var sql = "Insert into TB_Tipo_Memorandum(Id_Tipo,Tipo, SistemaUsuario) Values(@Id_Tipo,@Tipo, @SistemaUsuario)";
             using (IDbConnection dbConnection = Connection)

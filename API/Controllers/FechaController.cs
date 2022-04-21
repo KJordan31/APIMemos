@@ -34,7 +34,7 @@ namespace API.Controllers{
         public IActionResult GetProfileCount(string profileId, string SistemaFecha)
         {
             var sql =
-                @"SELECT * FROM TB_Memorandum WHERE MONTH (SistemaFecha)= @SistemaFecha AND YEAR(SistemaFecha) = @SistemaFecha;";
+                @"SELECT * FROM TB_Memorandum WHERE MONTH (SistemaFecha)= @SistemaFecha ;";
 
             using (IDbConnection dbConnection = Connection)
             {
